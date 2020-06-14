@@ -6,10 +6,13 @@ public class MaterialGradient : MonoBehaviour
 {
 
     private Renderer textRenderer;
+    [SerializeField]
+    ObjectFocus objectFocus;
 
     [SerializeField]
     Gradient gradient;
     private float gradientPos; //GradientPos will chnage as per the angle values derived from camera
+
     void setGradientPos(float position)
     {
         if(position == gradientPos)
@@ -26,18 +29,19 @@ public class MaterialGradient : MonoBehaviour
     void Awake()
     {
          textRenderer = gameObject.GetComponent<Renderer>();
+         objectFocus = gameObject.GetComponentInParent<ObjectFocus>();
     }
 
   
     void Start()
     {
         //Starting gradient pos value.
-        gradientPos = 0;
+        gradientPos = 1;
     }
 
    
     void Update()
     {
-         setGradientPos(Mathf.Sin(((Time.time) * 0.5f) + 0.5f));
+         setGradientPos(objectFocus.fadeAmount);
     }
 }
