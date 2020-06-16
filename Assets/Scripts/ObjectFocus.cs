@@ -1,13 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 using UnityEngine.Events;
 
 public class ObjectFocus : MonoBehaviour
 {
-    [System.Serializable]
-    public class floatEvent : UnityEvent<float> { }
-   
+
     [SerializeField]
     Transform reference;
     [SerializeField]
@@ -18,8 +17,12 @@ public class ObjectFocus : MonoBehaviour
     public float fadeAmount; // 0 to 1 based according to camera //Affected by delta.
     public float delta; //to measure distances //Delta will effect fadeamount // Fadeamount will affect gradient.
 
-    [SerializeField]
-    floatEvent valueChanged;
+    public bool isCounted;
+
+    public event Action GotFocusAction;
+    public event Action LostFocusAction;
+
+    [SerializeField] UnityEvent onActionTrigger;
 
     void Awake()
     {
@@ -28,16 +31,16 @@ public class ObjectFocus : MonoBehaviour
     
     void Start()
     {
-        
        
-
-        
     }
 
     void Update()
     {
         Fade();
+        ObjectFocusing();
+
     }
+
 
     void Fade()
     {
@@ -53,16 +56,60 @@ public class ObjectFocus : MonoBehaviour
         fadeAmount = Mathf.InverseLerp(maxAngle, minAngle, delta);
     }
 
-#if DEBUG
-    private void OnGUI()
+    void ObjectFocusing()
     {
-        GUIStyle myButton = new GUIStyle(GUI.skin.label);
-        myButton.fontSize = 50;
-        myButton.normal.textColor = Color.black;
+        if(delta <= minAngle)
+        {
 
-        GUILayout.Label("Delta: " + delta.ToString(),myButton);
-        GUILayout.Label("Fade Amount: " + fadeAmount.ToString(),myButton);
+            if(isCounted == false)
+            {
+                ObjectFocusManager.Instance.Add(this);
+                GotFocus();
+                isCounted = true;
+            }
 
+        }
+        else if (delta > minAngle || delta < 0)
+        {
+            if(isCounted == true)
+            {
+                ObjectFocusManager.Instance.Remove(this);
+                LostFocus();
+                isCounted = false;
+            }
+    
+        }
     }
+
+    //Gain Focus
+    public void GotFocus()
+    {
+        Debug.Log("Item got focus: " + gameObject.name);
+        GotFocusAction?.Invoke();
+    }
+
+    public void LostFocus()
+    {
+        Debug.Log("Item Lost focus: " + gameObject.name);
+        LostFocusAction?.Invoke();
+    }
+
+
+    public void ActionTrigger()
+    {
+        onActionTrigger.Invoke();
+    }
+
+#if DEBUG
+    //private void OnGUI()
+    //{
+    //    GUIStyle myButton = new GUIStyle(GUI.skin.label);
+    //    myButton.fontSize = 50;
+    //    myButton.normal.textColor = Color.black;
+
+    //    GUILayout.Label("Delta: " + delta.ToString(), myButton);
+    //    GUILayout.Label("Fade Amount: " + fadeAmount.ToString(), myButton);
+
+    //}
 #endif
 }
