@@ -161,7 +161,18 @@ MonoBehaviour:
   isCounted: 0
   onActionTrigger:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1468025462}
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!65 &115351821
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -635,7 +646,7 @@ TextMesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 781141989}
-  m_Text: Curosity Rover
+  m_Text: Right Object
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1
@@ -6329,7 +6340,7 @@ TextMesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1934137646}
-  m_Text: Curosity Rover
+  m_Text: Middle Object
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1

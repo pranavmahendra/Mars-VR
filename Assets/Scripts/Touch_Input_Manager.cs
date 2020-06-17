@@ -22,6 +22,7 @@ public class Touch_Input_Manager : MonoBehaviour
     [SerializeField]private UnityEvent onTouchTimerEnd;
     
 
+
     float timer;
 
     [SerializeField]
@@ -48,7 +49,7 @@ public class Touch_Input_Manager : MonoBehaviour
                     onTouchTimerUpdate.Invoke(timerUpdateCurve.Evaluate(Mathf.InverseLerp(0, delay, timer)));
                     if(timer > delay)
                     {
-                        onTouchTimerEnd.Invoke();
+                        onTouchTimerEnd.Invoke(); 
                     }
                     break;
             }
