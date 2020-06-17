@@ -29,6 +29,33 @@ public class Touch_Input_Manager : MonoBehaviour
     Image progressImage;
 
 
+    private void Start()
+    {
+        //Events will be invoked from OFM on adding and removing.
+        ObjectFocusManager.Instance.ObjectAdded += takeEvents; 
+        ObjectFocusManager.Instance.ObjectRemoved += ignoreEvents;
+    }
+
+
+    private void takeEvents()
+    {
+        gameObject.SetActive(true);
+    }
+
+
+    private void ignoreEvents()
+    {
+        gameObject.SetActive(false);
+        Cancel();
+    }
+
+    private void Cancel()
+    {
+        timer = 0;
+        onTouchTimerUpdate.Invoke(timerUpdateCurve.Evaluate(Mathf.InverseLerp(0, delay, timer)));
+        onTouchCancel.Invoke();
+    }
+
     void Update()
     {
         if(Input.touchCount > 0)
@@ -46,7 +73,8 @@ public class Touch_Input_Manager : MonoBehaviour
 
                 default:
                     timer += Time.deltaTime;
-                    onTouchTimerUpdate.Invoke(timerUpdateCurve.Evaluate(Mathf.InverseLerp(0, delay, timer)));
+                    //onTouchTimerUpdate.Invoke(timerUpdateCurve.Evaluate(Mathf.InverseLerp(0, delay, timer)));
+                    Cancel();
                     if(timer > delay)
                     {
                         onTouchTimerEnd.Invoke(); 
