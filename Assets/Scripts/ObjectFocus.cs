@@ -100,7 +100,7 @@ public class ObjectFocus : MonoBehaviour
         onActionTrigger.Invoke();
     }
 
-    
+
 
 #if DEBUG
     //private void OnGUI()

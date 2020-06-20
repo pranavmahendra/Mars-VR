@@ -23,6 +23,12 @@ public class MaterialGradient : MonoBehaviour
         {
             gradientPos = position;
             textRenderer.material.color = gradient.Evaluate(gradientPos);
+
+            if(gradientPos == 1)
+            {
+                textRenderer.material.color = Color.blue;
+            }
+
         }
     }
 
@@ -36,7 +42,8 @@ public class MaterialGradient : MonoBehaviour
     void Start()
     {
         //Starting gradient pos value.
-        gradientPos = 1;
+        //gradientPos = 1;
+        setGradientPos(1);
     }
 
    
