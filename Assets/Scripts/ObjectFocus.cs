@@ -28,10 +28,10 @@ public class ObjectFocus : MonoBehaviour
     {
         reference = Camera.main.transform; //Reference to camera
     }
-    
+
     void Start()
     {
-       
+
     }
 
     void Update()
@@ -50,7 +50,7 @@ public class ObjectFocus : MonoBehaviour
 
         Debug.DrawRay(reference.position, reference.forward, Color.cyan); //Shooting from camera.
 
-       
+
         delta = Vector3.Angle(d.normalized, reference.forward);
 
         fadeAmount = Mathf.InverseLerp(maxAngle, minAngle, delta);
@@ -58,10 +58,10 @@ public class ObjectFocus : MonoBehaviour
 
     void ObjectFocusing()
     {
-        if(delta <= minAngle)
+        if (delta <= minAngle)
         {
 
-            if(isCounted == false)
+            if (isCounted == false)
             {
                 ObjectFocusManager.Instance.Add(this);
                 GotFocus();
@@ -71,13 +71,13 @@ public class ObjectFocus : MonoBehaviour
         }
         else if (delta > minAngle || delta < 0)
         {
-            if(isCounted == true)
+            if (isCounted == true)
             {
                 ObjectFocusManager.Instance.Remove(this);
                 LostFocus();
                 isCounted = false;
             }
-    
+
         }
     }
 

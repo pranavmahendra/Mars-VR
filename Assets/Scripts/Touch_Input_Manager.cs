@@ -13,14 +13,14 @@ public class Touch_Input_Manager : MonoBehaviour
 
     [SerializeField]
     private AnimationCurve timerUpdateCurve;
- 
+
     float delay = 2f;
 
-    [SerializeField]private UnityEvent onTouch;
-    [SerializeField]private UnityEvent onTouchCancel;
-    [SerializeField]private FloatEvent onTouchTimerUpdate;
-    [SerializeField]private UnityEvent onTouchTimerEnd;
-    
+    [SerializeField] private UnityEvent onTouch;
+    [SerializeField] private UnityEvent onTouchCancel;
+    [SerializeField] private FloatEvent onTouchTimerUpdate;
+    [SerializeField] private UnityEvent onTouchTimerEnd;
+
 
 
     float timer;
@@ -32,7 +32,7 @@ public class Touch_Input_Manager : MonoBehaviour
     private void Start()
     {
         //Events will be invoked from OFM on adding and removing.
-        ObjectFocusManager.Instance.ObjectAdded += takeEvents; 
+        ObjectFocusManager.Instance.ObjectAdded += takeEvents;
         ObjectFocusManager.Instance.ObjectRemoved += ignoreEvents;
     }
 
@@ -58,9 +58,9 @@ public class Touch_Input_Manager : MonoBehaviour
 
     void Update()
     {
-        if(Input.touchCount > 0)
+        if (Input.touchCount > 0)
         {
-            switch(Input.touches[0].phase)
+            switch (Input.touches[0].phase)
             {
                 case TouchPhase.Began:
                     timer = 0;
@@ -75,9 +75,9 @@ public class Touch_Input_Manager : MonoBehaviour
                     timer += Time.deltaTime;
                     onTouchTimerUpdate.Invoke(timerUpdateCurve.Evaluate(Mathf.InverseLerp(0, delay, timer)));
                     //Cancel();
-                    if(timer > delay)
+                    if (timer > delay)
                     {
-                        onTouchTimerEnd.Invoke(); 
+                        onTouchTimerEnd.Invoke();
                     }
                     break;
             }

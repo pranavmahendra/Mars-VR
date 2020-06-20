@@ -44,7 +44,7 @@ public class ObjectFocusManager : SingletonGeneric<ObjectFocusManager>
     //    GUIStyle myButton = new GUIStyle(GUI.skin.label);
     //    myButton.fontSize = 50;  
     //    myButton.normal.textColor = Color.black;
-      
+
     //    GUILayout.Label("Objects in focus: " + Count.ToString(), myButton);
     //}
 #endif

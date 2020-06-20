@@ -12,6 +12,7 @@ public class MaterialGradient : MonoBehaviour
     [SerializeField]
     Gradient gradient;
     private float gradientPos; //GradientPos will chnage as per the angle values derived from camera
+    private TextMesh text;
 
     void setGradientPos(float position)
     {
@@ -23,19 +24,14 @@ public class MaterialGradient : MonoBehaviour
         {
             gradientPos = position;
             textRenderer.material.color = gradient.Evaluate(gradientPos);
-
-            if(gradientPos == 1)
-            {
-                textRenderer.material.color = Color.blue;
-            }
-
         }
     }
 
     void Awake()
     {
-         textRenderer = gameObject.GetComponent<Renderer>();
-         objectFocus = gameObject.GetComponentInParent<ObjectFocus>();
+        textRenderer = gameObject.GetComponent<Renderer>();
+        objectFocus = gameObject.GetComponentInParent<ObjectFocus>();
+        text = gameObject.GetComponent<TextMesh>();
     }
 
   
@@ -50,5 +46,22 @@ public class MaterialGradient : MonoBehaviour
     void Update()
     {
          setGradientPos(objectFocus.fadeAmount);
+        SetText();
+
+    }
+
+    void SetText()
+    {
+        if (gradientPos == 1)
+        {
+            text.fontStyle = FontStyle.Bold;
+
+        }
+        else
+        {
+            text.fontStyle = FontStyle.Normal;
+            text.characterSize = gradientPos;
+          
+        }
     }
 }
