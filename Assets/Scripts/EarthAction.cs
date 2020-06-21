@@ -10,6 +10,10 @@ public class EarthAction : MonoBehaviour
 
     public UnityEvent TextCompleted;
 
+    bool TextWritten = false;
+
+    [SerializeField] private GameObject Label;
+
     private string currentText;
     private float delay = 0.01f;
 
@@ -26,8 +30,10 @@ public class EarthAction : MonoBehaviour
             "Giovanni made observations of Mars in 1672 from Paris, while his colleague, Jean Richer made the same observation from Cayenne, French Guiana. " +
             "They used the parallax method to calculate the distance to Mars with surprising accuracy.";
 
-        StartCoroutine(ShowText());
+         StartCoroutine(ShowText());
+
     }
+
 
     public void setCanvasActive()
     {
@@ -36,7 +42,8 @@ public class EarthAction : MonoBehaviour
 
     IEnumerator ShowText()
     {
-        for (int i = 0; i < Para1.Length ; i++)
+
+        for (int i = 0; i < Para1.Length; i++)
         {
             currentText = Para1.Substring(0, i);
             textMesh.text = currentText;
@@ -46,8 +53,27 @@ public class EarthAction : MonoBehaviour
 
         TextCompleted.Invoke();
 
+        gameObject.SetActive(false);
+        
+        TextWritten = true;
 
-        this.gameObject.SetActive(false);
+    }
 
+
+
+    public void Deactive()
+    {
+        Invoke("deactivateCall", 10f);
+    }
+
+    private void deactivateCall()
+    {
+        if(TextWritten)
+        {
+            gameObject.SetActive(false);
+            Label.gameObject.SetActive(true);
+  
+        }
+     
     }
 }

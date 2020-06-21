@@ -46,7 +46,7 @@ public class Touch_Input_Manager : MonoBehaviour
     private void ignoreEvents()
     {
         gameObject.SetActive(false);
-        //Cancel();
+        Cancel();
     }
 
     private void Cancel()
@@ -74,10 +74,11 @@ public class Touch_Input_Manager : MonoBehaviour
                 default:
                     timer += Time.deltaTime;
                     onTouchTimerUpdate.Invoke(timerUpdateCurve.Evaluate(Mathf.InverseLerp(0, delay, timer)));
-                    //Cancel();
+                    
                     if (timer > delay)
                     {
                         onTouchTimerEnd.Invoke();
+                      
                     }
                     break;
             }

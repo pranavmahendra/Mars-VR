@@ -8,6 +8,10 @@ public class SunAction : MonoBehaviour
 {
     private string Para1;
 
+    [SerializeField] private GameObject Label;
+
+    bool TextWritten = false;
+
     public UnityEvent TextCompleted;
 
     private string currentText;
@@ -37,7 +41,8 @@ public class SunAction : MonoBehaviour
 
     IEnumerator ShowText()
     {
-        for (int i = 0; i < Para1.Length ; i++)
+
+        for (int i = 0; i < Para1.Length; i++)
         {
             currentText = Para1.Substring(0, i);
             textMesh.text = currentText;
@@ -47,8 +52,28 @@ public class SunAction : MonoBehaviour
 
         TextCompleted.Invoke();
 
+        gameObject.SetActive(false);
 
-        this.gameObject.SetActive(false);
+        TextWritten = true;
 
     }
+
+
+
+    public void Deactive()
+    {
+        Invoke("deactivateCall", 10f);
+    }
+
+    private void deactivateCall()
+    {
+        if (TextWritten)
+        {
+            gameObject.SetActive(false);
+            Label.gameObject.SetActive(true);
+
+        }
+
+    }
+
 }
