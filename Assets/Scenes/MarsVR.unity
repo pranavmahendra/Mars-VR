@@ -7876,6 +7876,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 11.25
       objectReference: {fileID: 0}
+    - target: {fileID: -5945761306642005124, guid: 6327b69a59c5544b6803fb881d405810,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: -5670612702550062635, guid: 6327b69a59c5544b6803fb881d405810,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -8104,7 +8109,7 @@ PrefabInstance:
     - target: {fileID: -927199367670048503, guid: 6327b69a59c5544b6803fb881d405810,
         type: 3}
       propertyPath: m_Name
-      value: Rover_Anim_Materials
+      value: CurosityRover
       objectReference: {fileID: 0}
     - target: {fileID: -927199367670048503, guid: 6327b69a59c5544b6803fb881d405810,
         type: 3}
